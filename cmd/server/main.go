@@ -19,9 +19,13 @@ func main() {
 	db.AutoMigrate(new(models.Guest))
 	db.AutoMigrate(new(models.Reservation))
 
-	handler := new(api.Handler).WithConnection(db)
+	// create router instance
+	router := new(api.Handler).WithConnection(db).Router(&api.RouterConfig{
+		ShowLogs:    true,
+		ReleaseMode: true,
+	})
 
-	if err := handler.Router().Run(`:3000`); err != nil {
+	if err := router.Run(`:3000`); err != nil {
 		panic("error running the server: " + err.Error())
 	}
 }
