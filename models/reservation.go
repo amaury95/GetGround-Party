@@ -32,6 +32,10 @@ func (r *Reservation) Validate(db *gorm.DB) error {
 		return fmt.Errorf("name should have at least 6 chatacters length")
 	}
 
+	if r.AccompanyingGuests < 0 {
+		return fmt.Errorf(`invalid "%d" guests amount`, r.AccompanyingGuests)
+	}
+
 	return nil
 }
 

@@ -40,7 +40,7 @@ var _ = Describe("Table controller", func() {
 			Conn:                      db,
 			SkipInitializeWithVersion: true,
 		}), &gorm.Config{
-			Logger: logger.Default.LogMode(logger.Error),
+			Logger: logger.Default.LogMode(logger.Silent),
 		})
 		Expect(err).NotTo(HaveOccurred())
 

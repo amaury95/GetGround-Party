@@ -59,7 +59,7 @@ func (h *Handler) CreateReservation(g *gin.Context) {
 */
 
 type GetReservationsResponse struct {
-	Elements []models.Reservation `json:"guests"`
+	Guests []models.Reservation `json:"guests"`
 }
 
 func (h *Handler) GetReservations(g *gin.Context) {
@@ -70,5 +70,5 @@ func (h *Handler) GetReservations(g *gin.Context) {
 		return
 	}
 
-	g.JSON(http.StatusOK, GetReservationsResponse{Elements: elements})
+	g.JSON(http.StatusOK, GetReservationsResponse{Guests: elements})
 }
