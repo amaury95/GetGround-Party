@@ -1,3 +1,5 @@
+###
+
 GET  http://localhost:3000/tables HTTP/1.1
 
 ###
@@ -8,3 +10,47 @@ content-type: application/json
 {
     "capacity": 1
 }
+
+###
+
+GET  http://localhost:3000/guest_list HTTP/1.1
+
+###
+
+POST http://localhost:3000/guest_list/userad1 HTTP/1.1
+content-type: application/json
+
+{
+    "table": 2,
+    "accompanying_guests": 0
+}
+
+###
+
+PUT http://localhost:3000/guests/userad1 HTTP/1.1
+content-type: application/json
+
+{
+    "accompanying_guests": 0
+}
+
+###
+
+DELETE /guests/name
+
+###
+
+PUT http://localhost:3000/guests/name HTTP/1.1
+content-type: application/json
+
+{
+    "accompanying_guests": 0
+}
+
+###
+
+GET /guests
+
+###
+
+GET /seats_empty

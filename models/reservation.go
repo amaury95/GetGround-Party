@@ -17,10 +17,10 @@ It is related to the following models:
 	 - Table (one-to-many)
 */
 type Reservation struct {
-	Name               string `gorm:"primarykey"`
+	Name               string `gorm:"primarykey" json:"name"`
 	AccompanyingGuests int    `json:"accompanying_guests"`
 
-	TableID int
+	TableID int `json:"table"`
 }
 
 // Guests amount of accompanying people including the guest
@@ -52,7 +52,7 @@ func (r *Reservation) BeforeCreate(db *gorm.DB) error {
 	var reservations []Reservation
 
 	// load table reservations
-	if err := db.Model(&table).Association("GuestReservations").Find(&reservations); err != nil {
+	if err := db.Model(&table).Association("Reservations").Find(&reservations); err != nil {
 		return fmt.Errorf("error loading table reservations: %v", err)
 	}
 
