@@ -8,7 +8,7 @@ POST http://localhost:3000/tables HTTP/1.1
 content-type: application/json
 
 {
-    "capacity": 6
+    "capacity": 2
 }
 
 ###
@@ -17,12 +17,12 @@ GET  http://localhost:3000/guest_list HTTP/1.1
 
 ###
 
-POST http://localhost:3000/guest_list/gabriela HTTP/1.1
+POST http://localhost:3000/guest_list/danica HTTP/1.1
 content-type: application/json
 
 {
-    "table": 2,
-    "accompanying_guests": 2
+    "table": 1,
+    "accompanying_guests": 1
 }
 
 ###

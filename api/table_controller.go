@@ -69,8 +69,22 @@ type GetSeatsEmptyRespose struct {
 	SeatsEmpty int `json:"seats_empty"`
 }
 
+// GetSeatsEmpty calculate the total availability of the party
 func (h *Handler) GetSeatsEmpty(g *gin.Context) {
-	var count int
+	// SET @availability := (SELECT SUM(capacity) FROM tables);
+	// SELECT @availability - COUNT(*) - SUM(accompanying_guests) FROM guests;
 
-	g.JSON(http.StatusOK, GetSeatsEmptyRespose{SeatsEmpty: count})
+	var capacity, occupied int
+
+	if err := h.db.Select("SUM(capacity)").Table("tables").Scan(&capacity).Error; err != nil {
+		g.String(http.StatusInternalServerError, "error calculating capacity: %v", err)
+		return
+	}
+
+	if err := h.db.Select("COUNT(*) + SUM(accompanying_guests)").Table("guests").Scan(&occupied).Error; err != nil {
+		g.String(http.StatusInternalServerError, "error getting occupancy: %v", err)
+		return
+	}
+
+	g.JSON(http.StatusOK, GetSeatsEmptyRespose{SeatsEmpty: capacity - occupied})
 }
