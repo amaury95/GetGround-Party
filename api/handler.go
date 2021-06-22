@@ -35,5 +35,9 @@ func (h *Handler) Router() *gin.Engine {
 	r.GET(`/guest_list`, h.GetReservations)
 
 	// guests
+	r.PUT(`/guests/:name`, h.CreateGuest)
+	r.GET(`/guests`, h.GetGuests)
+	r.DELETE(`/guests/:name`, h.DeleteGuest)
+
 	return r
 }

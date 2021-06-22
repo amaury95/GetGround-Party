@@ -8,6 +8,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+/*
+	Create Reservation
+*/
+
 type CreateReservationRequest struct {
 	Table  int `json:"table"`
 	Guests int `json:"accompanying_guests"`
@@ -49,6 +53,10 @@ func (h *Handler) CreateReservation(g *gin.Context) {
 
 	g.JSON(http.StatusCreated, CreateReservationResponse{Name: record.Name})
 }
+
+/*
+	Get Reservations
+*/
 
 type GetReservationsResponse struct {
 	Elements []models.Reservation `json:"guests"`

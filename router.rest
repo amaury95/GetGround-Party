@@ -8,7 +8,7 @@ POST http://localhost:3000/tables HTTP/1.1
 content-type: application/json
 
 {
-    "capacity": 1
+    "capacity": 6
 }
 
 ###
@@ -17,26 +17,30 @@ GET  http://localhost:3000/guest_list HTTP/1.1
 
 ###
 
-POST http://localhost:3000/guest_list/userad1 HTTP/1.1
+POST http://localhost:3000/guest_list/gabriela HTTP/1.1
 content-type: application/json
 
 {
     "table": 2,
-    "accompanying_guests": 0
+    "accompanying_guests": 2
 }
 
 ###
 
-PUT http://localhost:3000/guests/userad1 HTTP/1.1
+GET http://localhost:3000/guests
+
+###
+
+PUT http://localhost:3000/guests/amaury HTTP/1.1
 content-type: application/json
 
 {
-    "accompanying_guests": 0
+    "accompanying_guests": 1
 }
 
 ###
 
-DELETE /guests/name
+DELETE http://localhost:3000/guests/amaury
 
 ###
 
@@ -46,10 +50,6 @@ content-type: application/json
 {
     "accompanying_guests": 0
 }
-
-###
-
-GET /guests
 
 ###
 

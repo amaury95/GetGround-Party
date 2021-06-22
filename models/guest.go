@@ -2,6 +2,7 @@ package models
 
 import (
 	"fmt"
+	"time"
 
 	"gorm.io/gorm"
 )
@@ -20,7 +21,8 @@ type Guest struct {
 	Name               string `gorm:"primarykey"`
 	AccompanyingGuests int    `json:"accompanying_guests"`
 
-	TableID int
+	TableID   int       `json:"table"`
+	CreatedAt time.Time `json:"time_arrived"`
 }
 
 // TotalGuests amount of accompanying people including the guest

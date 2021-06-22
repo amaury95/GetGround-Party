@@ -8,6 +8,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+/*
+	Create Table
+*/
+
 type CreateTableRequest struct {
 	Capacity int `json:"capacity"`
 }
@@ -40,6 +44,10 @@ func (h *Handler) CreateTable(g *gin.Context) {
 
 	g.JSON(http.StatusCreated, record)
 }
+
+/*
+	Get Tables
+*/
 
 // GetTables returns a list of the existing tables on the database.
 // TODO: pagination
