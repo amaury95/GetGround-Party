@@ -29,6 +29,7 @@ func (h *Handler) Router() *gin.Engine {
 	// tables
 	r.GET(`/tables`, h.GetTables)
 	r.POST(`/tables`, h.CreateTable)
+	r.GET(`/seats_empty`, h.GetSeatsEmpty)
 
 	// reservations
 	r.POST(`/guest_list/:name`, h.CreateReservation)

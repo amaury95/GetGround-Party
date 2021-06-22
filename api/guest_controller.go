@@ -87,8 +87,7 @@ func (h *Handler) DeleteGuest(g *gin.Context) {
 	// decode name from params
 	name := g.Param("name")
 
-	var record models.Guest
-	if err := h.db.Where("name = ?", name).Delete(&record).Error; err != nil {
+	if err := h.db.Delete(new(models.Guest), "name = ?", name).Error; err != nil {
 		g.String(http.StatusInternalServerError, "error deleting guest: %v", err)
 		return
 	}

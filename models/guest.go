@@ -26,9 +26,7 @@ type Guest struct {
 }
 
 // TotalGuests amount of accompanying people including the guest
-func (g *Guest) TotalGuests() int {
-	return 1 + g.AccompanyingGuests
-}
+func (g *Guest) TotalGuests() int { return 1 + g.AccompanyingGuests }
 
 // Validate guest reservation fields.
 func (g *Guest) Validate(db *gorm.DB) error {

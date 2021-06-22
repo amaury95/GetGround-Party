@@ -61,3 +61,16 @@ func (h *Handler) GetTables(g *gin.Context) {
 
 	g.JSON(http.StatusOK, tables)
 }
+
+/*
+	Get Seats Empty
+*/
+type GetSeatsEmptyRespose struct {
+	SeatsEmpty int `json:"seats_empty"`
+}
+
+func (h *Handler) GetSeatsEmpty(g *gin.Context) {
+	var count int
+
+	g.JSON(http.StatusOK, GetSeatsEmptyRespose{SeatsEmpty: count})
+}

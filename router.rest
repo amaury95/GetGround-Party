@@ -53,4 +53,4 @@ content-type: application/json
 
 ###
 
-GET /seats_empty
+GET http://localhost:3000/seats_empty
