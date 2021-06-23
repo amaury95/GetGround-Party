@@ -18,7 +18,7 @@ import (
 	"github.com/DATA-DOG/go-sqlmock"
 )
 
-var _ = Describe("Table controller", func() {
+var _ = Describe("Reservation controller", func() {
 	var (
 		mock   sqlmock.Sqlmock
 		server *httptest.Server
@@ -80,7 +80,7 @@ var _ = Describe("Table controller", func() {
 
 		mock.ExpectCommit()
 
-		client.POST(`/guest_list/username`).WithJSON(api.CreateReservationRequest{Table: 1, Guests: 5}).
+		client.POST(`/guest_list/username`).WithJSON(api.CreateReservationRequest{Table: 1, AccompanyingGuests: 5}).
 			Expect().Status(http.StatusCreated).
 			JSON().Equal(api.CreateReservationResponse{Name: "username"})
 	})
@@ -101,18 +101,18 @@ var _ = Describe("Table controller", func() {
 
 		mock.ExpectCommit()
 
-		client.POST(`/guest_list/username`).WithJSON(api.CreateReservationRequest{Table: 1, Guests: 5}).
+		client.POST(`/guest_list/username`).WithJSON(api.CreateReservationRequest{Table: 1, AccompanyingGuests: 5}).
 			Expect().Status(http.StatusCreated).
 			JSON().Equal(api.CreateReservationResponse{Name: "username"})
 	})
 
 	It("fails creating a reservation with a name shorter than 6 characters", func() {
-		client.POST(`/guest_list/user`).WithJSON(api.CreateReservationRequest{Table: 1, Guests: 5}).
+		client.POST(`/guest_list/user`).WithJSON(api.CreateReservationRequest{Table: 1, AccompanyingGuests: 5}).
 			Expect().Status(http.StatusBadRequest)
 	})
 
 	It("fails creating a reservation with negative accompanying", func() {
-		client.POST(`/guest_list/username`).WithJSON(api.CreateReservationRequest{Table: 1, Guests: -5}).
+		client.POST(`/guest_list/username`).WithJSON(api.CreateReservationRequest{Table: 1, AccompanyingGuests: -5}).
 			Expect().Status(http.StatusBadRequest)
 	})
 
@@ -127,7 +127,7 @@ var _ = Describe("Table controller", func() {
 
 		mock.ExpectRollback()
 
-		client.POST(`/guest_list/username`).WithJSON(api.CreateReservationRequest{Table: 1, Guests: 5}).
+		client.POST(`/guest_list/username`).WithJSON(api.CreateReservationRequest{Table: 1, AccompanyingGuests: 5}).
 			Expect().Status(http.StatusInternalServerError)
 	})
 
@@ -143,7 +143,7 @@ var _ = Describe("Table controller", func() {
 
 		mock.ExpectRollback()
 
-		client.POST(`/guest_list/username`).WithJSON(api.CreateReservationRequest{Table: 1, Guests: 5}).
+		client.POST(`/guest_list/username`).WithJSON(api.CreateReservationRequest{Table: 1, AccompanyingGuests: 5}).
 			Expect().Status(http.StatusInternalServerError)
 	})
 

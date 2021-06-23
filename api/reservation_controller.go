@@ -14,7 +14,7 @@ import (
 
 type CreateReservationRequest struct {
 	Table  int `json:"table"`
-	Guests int `json:"accompanying_guests"`
+	AccompanyingGuests int `json:"accompanying_guests"`
 }
 
 type CreateReservationResponse struct {
@@ -35,7 +35,7 @@ func (h *Handler) CreateReservation(g *gin.Context) {
 
 	record := models.Reservation{
 		Name:               name,
-		AccompanyingGuests: body.Guests,
+		AccompanyingGuests: body.AccompanyingGuests,
 		TableID:            body.Table,
 	}
 

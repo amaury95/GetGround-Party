@@ -13,7 +13,7 @@ import (
 */
 
 type CreateGuestRequest struct {
-	Guests int `json:"accompanying_guests"`
+	AccompanyingGuests int `json:"accompanying_guests"`
 }
 
 type CreateGuestResponse struct {
@@ -41,7 +41,7 @@ func (h *Handler) CreateGuest(g *gin.Context) {
 
 	record := models.Guest{
 		Name:               name,
-		AccompanyingGuests: body.Guests,
+		AccompanyingGuests: body.AccompanyingGuests,
 		TableID:            reservation.TableID,
 	}
 
@@ -65,7 +65,7 @@ func (h *Handler) CreateGuest(g *gin.Context) {
 */
 
 type GetGuestsResponse struct {
-	Elements []models.Guest `json:"guests"`
+	Guests []models.Guest `json:"guests"`
 }
 
 func (h *Handler) GetGuests(g *gin.Context) {
@@ -76,7 +76,7 @@ func (h *Handler) GetGuests(g *gin.Context) {
 		return
 	}
 
-	g.JSON(http.StatusOK, GetGuestsResponse{Elements: elements})
+	g.JSON(http.StatusOK, GetGuestsResponse{Guests: elements})
 }
 
 /*
