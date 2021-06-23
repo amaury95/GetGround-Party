@@ -5,6 +5,7 @@ go 1.16
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.0 // indirect
 	github.com/ajg/form v1.5.1 // indirect
+	github.com/akamensky/argparse v1.3.0 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/gavv/httpexpect v2.0.0+incompatible // indirect
 	github.com/gin-gonic/gin v1.7.2

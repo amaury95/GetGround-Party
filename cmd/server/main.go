@@ -1,6 +1,10 @@
 package main
 
 import (
+	"fmt"
+	"os"
+
+	"github.com/akamensky/argparse"
 	"github.com/amaury95/GetGround-Party/api"
 	"github.com/amaury95/GetGround-Party/models"
 	"gorm.io/driver/mysql"
@@ -8,8 +12,28 @@ import (
 )
 
 func main() {
+	// setup parser
+	parser := argparse.NewParser("party", "Party is the webserver to manage GetGround invitations and guests.")
+
+	// setup parser arguments
+	var (
+		port     = parser.Int("p", "port", &argparse.Options{Default: 3033, Help: `server port to listen for requests`})
+		username = parser.String("n", "username", &argparse.Options{Default: "root", Help: `mysql connection username`})
+		password = parser.String("k", "password", &argparse.Options{Default: "example", Help: `mysql connection password`})
+		url      = parser.String("u", "url", &argparse.Options{Default: "127.0.0.1:3306", Help: `mysql connection server url`})
+		database = parser.String("d", "database", &argparse.Options{Default: "party", Help: `mysql connection database name`})
+	)
+
+	err := parser.Parse(os.Args)
+	if err != nil {
+		// In case of error print error and print usage
+		// This can also be done by passing -h or --help flags
+		fmt.Print(parser.Usage(err))
+	}
+
 	// open db connection
-	db, err := gorm.Open(mysql.Open("root:example@tcp(127.0.0.1:3306)/party?charset=utf8mb4&parseTime=true"), new(gorm.Config))
+	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=true", *username, *password, *url, *database)
+	db, err := gorm.Open(mysql.Open(dsn), new(gorm.Config))
 	if err != nil {
 		panic("error connecting to database: " + err.Error())
 	}
@@ -25,7 +49,7 @@ func main() {
 		ReleaseMode: true,
 	})
 
-	if err := router.Run(`:3000`); err != nil {
+	if err := router.Run(fmt.Sprintf(":%d", *port)); err != nil {
 		panic("error running the server: " + err.Error())
 	}
 }
