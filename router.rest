@@ -1,8 +1,8 @@
-###
+### Returns the created tables
 
 GET  http://localhost:3000/tables HTTP/1.1
 
-###
+### Creates a table with the given capacity
 
 POST http://localhost:3000/tables HTTP/1.1
 content-type: application/json
@@ -11,13 +11,13 @@ content-type: application/json
     "capacity": 2
 }
 
-###
+### Returns the existing guests list
 
 GET  http://localhost:3000/guest_list HTTP/1.1
 
-###
+### Creates a reservation in the guests list
 
-POST http://localhost:3000/guest_list/danica HTTP/1.1
+POST http://localhost:3000/guest_list/username HTTP/1.1
 content-type: application/json
 
 {
@@ -25,32 +25,23 @@ content-type: application/json
     "accompanying_guests": 1
 }
 
-###
+### Returns the party guests
 
 GET http://localhost:3000/guests
 
-###
+### Creates a guest registry
 
-PUT http://localhost:3000/guests/amaury HTTP/1.1
+PUT http://localhost:3000/guests/username HTTP/1.1
 content-type: application/json
 
 {
     "accompanying_guests": 1
 }
 
-###
+### Deletes a guest registry
 
 DELETE http://localhost:3000/guests/amaury
 
-###
-
-PUT http://localhost:3000/guests/name HTTP/1.1
-content-type: application/json
-
-{
-    "accompanying_guests": 0
-}
-
-###
+### Returns the empty seats
 
 GET http://localhost:3000/seats_empty
